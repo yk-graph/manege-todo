@@ -16,6 +16,7 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
+import Header from "@/components/header";
 
 type TodoType = {
   id: string;
@@ -98,39 +99,8 @@ export default function Home() {
 
   return (
     <>
-      <div className="flex items-center gap-x-4 px-4">
-        <span
-          className={clsx(
-            "cursor-pointer",
-            mode === "create" ? "font-bold" : "text-neutral-700"
-          )}
-          onClick={() => {
-            setMode("create");
-            setValue("");
-          }}
-        >
-          Create
-        </span>
-        <span
-          className={clsx(
-            "cursor-pointer",
-            mode === "update" ? "font-bold" : "text-neutral-700"
-          )}
-          onClick={() => setMode("update")}
-        >
-          Update
-        </span>
-        <form onSubmit={handleSubmit}>
-          <input
-            className=" focus:border-blue-500 p-2 text-gray-700 rounded-md mr-4"
-            type="text"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-          />
-          <button type="submit">submit</button>
-        </form>
-      </div>
-      <hr className="my-4" />
+      <Header selected={selected} />
+      <hr className="mb-4" />
       {todos.map((item) => (
         <div key={item.id} className="flex items-center py-2 px-4 w-[400px]">
           <input
